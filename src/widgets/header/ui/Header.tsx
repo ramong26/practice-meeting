@@ -4,7 +4,7 @@ import { MenuIcon } from '@/shared/assets/icons';
 import { useBreakPoint } from '@/shared/lib/useBreakPoint';
 import { route } from '@/shared/constants/route';
 
-import Logo from 'src/assets/logo.svg';
+import Logo from '@/assets/logo.svg';
 
 export function Header() {
   const breakPoint = useBreakPoint();
