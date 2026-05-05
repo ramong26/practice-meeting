@@ -1,5 +1,5 @@
 export const route = {
-  landing: '/landing',
+  landing: '/',
 
   // _main 경로
   home: '/home',
