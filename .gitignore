@@ -23,5 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# tanstack
+routeTree.gen.ts‎
+
 # etc
 .tanstack
