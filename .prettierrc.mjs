@@ -1,0 +1,37 @@
+export default {
+  tabWidth: 2,
+  singleQuote: true,
+  arrowParens: 'always',
+  semi: true,
+  jsxSingleQuote: true,
+  trailingComma: 'es5',
+  printWidth: 80,
+  endOfLine: 'lf',
+  proseWrap: 'always',
+  bracketSpacing: true,
+  quoteProps: 'as-needed',
+  plugins: [
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
+  
+  importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
+
+  importOrder: [
+    '^react$',
+    '^react-dom(.*)$',
+    '',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '',
+    '^@/app(.*)$',
+    '^@/pages(.*)$',
+    '^@/widgets(.*)$',
+    '^@/features(.*)$',
+    '^@/entities(.*)$',
+    '^@/shared(.*)$',
+    '',
+    '^[./]',
+  ],
+  tailwindFunctions: ['clsx', 'cn', 'twmerge', 'cva'],
+};
