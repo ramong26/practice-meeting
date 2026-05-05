@@ -12,8 +12,6 @@ export function useBreakPoint() {
       setBreakPoint(window.innerWidth < 768 ? 'mobile' : 'desktop');
     };
 
-    handleResize();
-
     window.addEventListener('resize', handleResize);
 
     return () => {

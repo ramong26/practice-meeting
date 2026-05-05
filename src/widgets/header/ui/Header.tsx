@@ -2,6 +2,9 @@ import { Link } from '@tanstack/react-router';
 
 import { MenuIcon } from '@/shared/assets/icons';
 import { useBreakPoint } from '@/shared/lib/useBreakPoint';
+import { route } from '@/shared/constants/route';
+
+import Logo from 'src/assets/logo.svg';
 
 export function Header() {
   const breakPoint = useBreakPoint();
@@ -10,9 +13,9 @@ export function Header() {
     <header className='mx-auto max-w-7xl px-4 py-2 transition-all duration-200 md:px-6 md:py-4'>
       <div className='flex flex-row items-center justify-between'>
         <div className='flex items-center gap-4'>
-          <Link to='/'>
+          <Link to={route.landing}>
             <img
-              src='src\assets\logo.svg'
+              src={Logo}
               alt='같이달램 로고'
               className='m-2 h-4 w-auto cursor-pointer transition-all duration-200 md:h-[22.85px]'
             />
@@ -34,17 +37,17 @@ export function Header() {
   );
 }
 
+// TODO: link 타입은 추후 필수값으로 수정
 interface HeaderBaseTextProps {
   text: string;
   link?: string;
-  selected?: boolean;
 }
-function HeaderBaseText({ text, link, selected }: HeaderBaseTextProps) {
+function HeaderBaseText({ text, link }: HeaderBaseTextProps) {
   return (
     <Link
       to={link}
-      data-selected={selected}
-      className={`p-4 text-base font-medium text-[#737373] transition-all duration-200 hover:font-semibold hover:text-[#009973] data-[selected=true]:text-[#009973]`}
+      preload='intent'
+      className={`p-4 text-base font-medium text-[#737373] transition-all duration-200 hover:font-semibold hover:text-[#009973]`}
     >
       {text}
     </Link>
