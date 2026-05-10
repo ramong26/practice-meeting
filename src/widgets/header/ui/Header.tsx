@@ -28,7 +28,7 @@ export function Header() {
           </div>
         </div>
         {breakPoint === 'desktop' ? (
-          <HeaderBaseText text='로그인' />
+          <HeaderBaseText text='로그인' link={route.login} />
         ) : (
           <MenuIcon />
         )}

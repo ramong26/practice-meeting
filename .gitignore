@@ -23,6 +23,6 @@ dist-ssr
 
 # tanstack
 routeTree.gen.ts‎
-
+routeTree.gen
 # etc
 .tanstack
