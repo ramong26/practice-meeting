@@ -25,12 +25,13 @@ export function LoginPage() {
               </CardHeader>
               <div className="flex flex-col gap-4">
                 <Field>
-                  <FieldLabel htmlFor="text" className="gap-0.5">
+                  <FieldLabel htmlFor="id-email" className="gap-0.5">
                     아이디 <span className="text-green-scale-600">*</span>
                   </FieldLabel>
                   <Input
                     required
-                    id="text"
+                    id="id-email"
+                    type="email"
                     className="bg-gray-scale-50 p-3 h-fit min-w-114"
                     placeholder="이메일을 입력해주세요"
                   />
