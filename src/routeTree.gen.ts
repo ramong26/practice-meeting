@@ -13,6 +13,8 @@ import { Route as MainRouteImport } from './app/routes/_main'
 import { Route as IndexRouteImport } from './app/routes/index'
 import { Route as LandingIndexRouteImport } from './app/routes/landing/index'
 import { Route as MainHomeIndexRouteImport } from './app/routes/_main/home/index'
+import { Route as AuthSignupIndexRouteImport } from './app/routes/_auth/signup/index'
+import { Route as AuthLoginIndexRouteImport } from './app/routes/_auth/login/index'
 
 const MainRoute = MainRouteImport.update({
   id: '/_main',
@@ -33,15 +35,29 @@ const MainHomeIndexRoute = MainHomeIndexRouteImport.update({
   path: '/home/',
   getParentRoute: () => MainRoute,
 } as any)
+const AuthSignupIndexRoute = AuthSignupIndexRouteImport.update({
+  id: '/_auth/signup/',
+  path: '/signup/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginIndexRoute = AuthLoginIndexRouteImport.update({
+  id: '/_auth/login/',
+  path: '/login/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/landing/': typeof LandingIndexRoute
+  '/login/': typeof AuthLoginIndexRoute
+  '/signup/': typeof AuthSignupIndexRoute
   '/home/': typeof MainHomeIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/landing': typeof LandingIndexRoute
+  '/login': typeof AuthLoginIndexRoute
+  '/signup': typeof AuthSignupIndexRoute
   '/home': typeof MainHomeIndexRoute
 }
 export interface FileRoutesById {
@@ -49,20 +65,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_main': typeof MainRouteWithChildren
   '/landing/': typeof LandingIndexRoute
+  '/_auth/login/': typeof AuthLoginIndexRoute
+  '/_auth/signup/': typeof AuthSignupIndexRoute
   '/_main/home/': typeof MainHomeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/landing/' | '/home/'
+  fullPaths: '/' | '/landing/' | '/login/' | '/signup/' | '/home/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/landing' | '/home'
-  id: '__root__' | '/' | '/_main' | '/landing/' | '/_main/home/'
+  to: '/' | '/landing' | '/login' | '/signup' | '/home'
+  id:
+    | '__root__'
+    | '/'
+    | '/_main'
+    | '/landing/'
+    | '/_auth/login/'
+    | '/_auth/signup/'
+    | '/_main/home/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   MainRoute: typeof MainRouteWithChildren
   LandingIndexRoute: typeof LandingIndexRoute
+  AuthLoginIndexRoute: typeof AuthLoginIndexRoute
+  AuthSignupIndexRoute: typeof AuthSignupIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -95,6 +122,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainHomeIndexRouteImport
       parentRoute: typeof MainRoute
     }
+    '/_auth/signup/': {
+      id: '/_auth/signup/'
+      path: '/signup'
+      fullPath: '/signup/'
+      preLoaderRoute: typeof AuthSignupIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth/login/': {
+      id: '/_auth/login/'
+      path: '/login'
+      fullPath: '/login/'
+      preLoaderRoute: typeof AuthLoginIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -112,6 +153,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   MainRoute: MainRouteWithChildren,
   LandingIndexRoute: LandingIndexRoute,
+  AuthLoginIndexRoute: AuthLoginIndexRoute,
+  AuthSignupIndexRoute: AuthSignupIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
