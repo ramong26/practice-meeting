@@ -176,19 +176,26 @@ function FieldError({
   errors,
   ...props
 }: React.ComponentProps<'div'> & {
-  errors?: Array<{ message?: string } | undefined>;
+  errors?: Array<{ message?: string } | undefined> | string | undefined;
 }) {
   const content = useMemo(() => {
     if (children) {
       return children;
     }
 
-    if (!errors?.length) {
+    if (!errors) {
       return null;
     }
 
+    let errorArray: Array<{ message?: string } | undefined> = [];
+    if (typeof errors === 'string') {
+      errorArray = [{ message: errors }];
+    } else if (Array.isArray(errors)) {
+      errorArray = errors;
+    }
+
     const uniqueErrors = [
-      ...new Map(errors.map((error) => [error?.message, error])).values(),
+      ...new Map(errorArray.map((error) => [error?.message, error])).values(),
     ];
 
     if (uniqueErrors?.length == 1) {
