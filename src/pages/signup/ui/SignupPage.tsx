@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from '@tanstack/react-router';
 import { EyeOffIcon } from 'lucide-react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { type SignupFormData, signupSchema } from '@/feature/auth/model/schema';
 
@@ -20,7 +20,7 @@ import {
 export function SignupPage() {
   const {
     handleSubmit,
-    control,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -55,39 +55,31 @@ export function SignupPage() {
                   <FieldLabel htmlFor="name" className="gap-0.5">
                     이름 <span className="text-green-scale-600">*</span>
                   </FieldLabel>
-                  <Controller
-                    name="name"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        required
-                        id="name"
-                        className="bg-gray-scale-50 p-3 h-fit min-w-114"
-                        placeholder="이름을 입력해주세요"
-                      />
-                    )}
+
+                  <Input
+                    {...register('name')}
+                    required
+                    id="name"
+                    className="bg-gray-scale-50 p-3 h-fit min-w-114"
+                    placeholder="이름을 입력해주세요"
                   />
+
                   <FieldError errors={errors?.name?.message}></FieldError>
                 </Field>
                 <Field>
                   <FieldLabel htmlFor="id-email" className="gap-0.5">
                     아이디 <span className="text-green-scale-600">*</span>
                   </FieldLabel>
-                  <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        required
-                        id="id-email"
-                        type="email"
-                        className="bg-gray-scale-50 p-3 h-fit min-w-114"
-                        placeholder="이메일을 입력해주세요"
-                      />
-                    )}
+
+                  <Input
+                    {...register('email')}
+                    required
+                    id="id-email"
+                    type="email"
+                    className="bg-gray-scale-50 p-3 h-fit min-w-114"
+                    placeholder="이메일을 입력해주세요"
                   />
+
                   <FieldError errors={errors?.email?.message}></FieldError>
                 </Field>
 
@@ -95,26 +87,23 @@ export function SignupPage() {
                   <FieldLabel htmlFor="password" className="gap-0.5">
                     비밀번호 <span className="text-green-scale-600">*</span>
                   </FieldLabel>
-                  <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                      <InputGroup className="bg-gray-scale-50 p-3 h-fit min-w-114">
-                        <InputGroupInput
-                          {...field}
-                          id="password"
-                          type="password"
-                          className="p-0 h-fit"
-                          placeholder="비밀번호를 입력해주세요"
-                        />
-                        <InputGroupAddon
-                          className="p-0 cursor-pointer"
-                          align="inline-end">
-                          <EyeOffIcon size={24} />
-                        </InputGroupAddon>
-                      </InputGroup>
-                    )}
-                  />
+
+                  <InputGroup className="bg-gray-scale-50 p-3 h-fit min-w-114">
+                    <InputGroupInput
+                      {...register('password')}
+                      required
+                      id="password"
+                      type="password"
+                      className="p-0 h-fit"
+                      placeholder="비밀번호를 입력해주세요"
+                    />
+                    <InputGroupAddon
+                      className="p-0 cursor-pointer"
+                      align="inline-end">
+                      <EyeOffIcon size={24} />
+                    </InputGroupAddon>
+                  </InputGroup>
+
                   <FieldError errors={errors?.password?.message}></FieldError>
                 </Field>
                 <Field>
@@ -122,26 +111,23 @@ export function SignupPage() {
                     비밀번호 확인
                     <span className="text-green-scale-600">*</span>
                   </FieldLabel>
-                  <Controller
-                    name="passwordConfirm"
-                    control={control}
-                    render={({ field }) => (
-                      <InputGroup className="bg-gray-scale-50 p-3 h-fit min-w-114">
-                        <InputGroupInput
-                          {...field}
-                          id="password-confirm"
-                          type="password"
-                          className="p-0 h-fit"
-                          placeholder="비밀번호를 한 번 더 입력해주세요"
-                        />
-                        <InputGroupAddon
-                          className="p-0 cursor-pointer"
-                          align="inline-end">
-                          <EyeOffIcon size={24} />
-                        </InputGroupAddon>
-                      </InputGroup>
-                    )}
-                  />
+
+                  <InputGroup className="bg-gray-scale-50 p-3 h-fit min-w-114">
+                    <InputGroupInput
+                      {...register('passwordConfirm')}
+                      required
+                      id="password-confirm"
+                      type="password"
+                      className="p-0 h-fit"
+                      placeholder="비밀번호를 한 번 더 입력해주세요"
+                    />
+                    <InputGroupAddon
+                      className="p-0 cursor-pointer"
+                      align="inline-end">
+                      <EyeOffIcon size={24} />
+                    </InputGroupAddon>
+                  </InputGroup>
+
                   <FieldError
                     errors={errors?.passwordConfirm?.message}></FieldError>
                 </Field>
@@ -176,13 +162,17 @@ function SignupPageFooter() {
           <hr className="text-gray-scale-300 flex-1"></hr>
         </div>
         <div className="flex w-full gap-3">
-          <button className=" cursor-pointer flex gap-3 py-3 px-6.5 bg-white rounded-xl border border-gray-scale-200 w-full items-center justify-around">
+          <button
+            type="button"
+            className=" cursor-pointer flex gap-3 py-3 px-6.5 bg-white rounded-xl border border-gray-scale-200 w-full items-center justify-around">
             <img src="../../../../public/google.svg" alt="Google" />
             <span className="text-base font-semibold text-gray-scale-800">
               구글로 계속하기
             </span>
           </button>
-          <button className=" cursor-pointer flex gap-3 py-3 px-6.5 bg-[#FFEE01] rounded-xl w-full items-center justify-around">
+          <button
+            type="button"
+            className=" cursor-pointer flex gap-3 py-3 px-6.5 bg-[#FFEE01] rounded-xl w-full items-center justify-around">
             <img src="../../../../public/kakao.svg" alt="Kakao" />
             <span className="text-base font-semibold text-gray-scale-800">
               카카오로 계속하기
