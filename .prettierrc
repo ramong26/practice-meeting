@@ -16,7 +16,7 @@
     "^@/app(.*)$",
     "^@/pages(.*)$",
     "^@/widgets(.*)$",
-    "^@/features(.*)$",
+    "^@/feature(.*)$",
     "^@/entities(.*)$",
     "^@/shared(.*)$",
     "^[./]"
