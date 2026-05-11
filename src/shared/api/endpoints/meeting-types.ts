@@ -14,9 +14,11 @@ export const getMeetingTypes = () => {
 export const postMeetingType = (
   request: components['schemas']['CreateMeetingType'],
 ) => {
-  return api.post(`${teamId}/meeting-types`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/meeting-types`, {
+      json: request,
+    })
+    .json();
 };
 
 // 모임 타입 수정
@@ -24,9 +26,11 @@ export const patchMeetingType = (
   typeId: number,
   request: components['schemas']['UpdateMeetingType'],
 ) => {
-  return api.patch(`${teamId}/meeting-types/${typeId}`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/meeting-types/${typeId}`, {
+      json: request,
+    })
+    .json();
 };
 
 // 모임 타입 삭제

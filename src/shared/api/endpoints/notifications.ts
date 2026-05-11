@@ -12,17 +12,17 @@ export const getNotifications = () => {
 
 // 읽지 않은 알림 수
 export const getUnreadNotificationCount = () => {
-  return api.get(`${teamId}/notifications/unread-count`);
+  return api.get(`${teamId}/notifications/unread-count`).json();
 };
 
 // 전체 알림 읽음 처리
 export const putNotificationsReadAll = () => {
-  return api.put(`${teamId}/notifications/read-all`);
+  return api.put(`${teamId}/notifications/read-all`).json();
 };
 
 // 단일 알림 읽음 처리
 export const putNotificationRead = (notificationId: number) => {
-  return api.put(`${teamId}/notifications/${notificationId}/read`);
+  return api.put(`${teamId}/notifications/${notificationId}/read`).json();
 };
 
 // 알림 삭제

@@ -28,9 +28,11 @@ export const getMeetings = () => {
 export const postMeeting = (
   request: components['schemas']['CreateMeeting'],
 ) => {
-  return api.post(`${teamId}/meetings`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/meetings`, {
+      json: request,
+    })
+    .json();
 };
 
 // 모임 상세
@@ -45,9 +47,11 @@ export const patchMeeting = (
   meetingId: number,
   request: components['schemas']['UpdateMeeting'],
 ) => {
-  return api.patch(`${teamId}/meetings/${meetingId}`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/meetings/${meetingId}`, {
+      json: request,
+    })
+    .json();
 };
 
 // 모임 삭제
@@ -57,7 +61,7 @@ export const deleteMeeting = (meetingId: number) => {
 
 // 모임 참여
 export const postJoinMeeting = (meetingId: number) => {
-  return api.post(`${teamId}/meetings/${meetingId}/join`);
+  return api.post(`${teamId}/meetings/${meetingId}/join`).json();
 };
 
 // 모임 참여 취소
@@ -67,7 +71,7 @@ export const deleteJoinMeeting = (meetingId: number) => {
 
 // 모임 참여자 목록
 export const getMeetingParticipants = (meetingId: number) => {
-  return api.get(`${teamId}/meetings/${meetingId}/participants`);
+  return api.get(`${teamId}/meetings/${meetingId}/participants`).json();
 };
 
 // 모임 상태 변경
@@ -75,7 +79,9 @@ export const patchMeetingStatus = (
   meetingId: number,
   request: components['schemas']['UpdateMeetingStatus'],
 ) => {
-  return api.patch(`${teamId}/meetings/${meetingId}/status`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/meetings/${meetingId}/status`, {
+      json: request,
+    })
+    .json();
 };

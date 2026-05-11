@@ -7,7 +7,9 @@ import { api } from '../client/kyClient';
 export const postImage = (
   request: components['schemas']['PresignedUrlRequest'],
 ) => {
-  return api.post(`${teamId}/images`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/images`, {
+      json: request,
+    })
+    .json();
 };

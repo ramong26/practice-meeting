@@ -19,7 +19,7 @@ export const getReviewStatistics = () => {
 
 // 리뷰 카테고리 통계
 export const getReviewCategoryStatistics = () => {
-  return api.get(`${teamId}/reviews/categories/statistics`);
+  return api.get(`${teamId}/reviews/categories/statistics`).json();
 };
 
 // 리뷰 수정
@@ -27,9 +27,11 @@ export const patchReview = (
   reviewId: number,
   request: components['schemas']['UpdateReview'],
 ) => {
-  return api.patch(`${teamId}/reviews/${reviewId}`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/reviews/${reviewId}`, {
+      json: request,
+    })
+    .json();
 };
 
 // 리뷰 삭제
@@ -49,7 +51,9 @@ export const postMeetingReview = (
   meetingId: number,
   request: components['schemas']['CreateReviewByMeeting'],
 ) => {
-  return api.post(`${teamId}/meetings/${meetingId}/reviews`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/meetings/${meetingId}/reviews`, {
+      json: request,
+    })
+    .json();
 };

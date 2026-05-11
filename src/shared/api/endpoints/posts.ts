@@ -10,9 +10,11 @@ export const getPosts = () => {
 
 // 게시글 작성
 export const postPost = (request: components['schemas']['CreatePost']) => {
-  return api.post(`${teamId}/posts`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/posts`, {
+      json: request,
+    })
+    .json();
 };
 
 // 게시글 상세
@@ -27,9 +29,11 @@ export const patchPost = (
   postId: number,
   request: components['schemas']['UpdatePost'],
 ) => {
-  return api.patch(`${teamId}/posts/${postId}`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/posts/${postId}`, {
+      json: request,
+    })
+    .json();
 };
 
 // 게시글 삭제
@@ -49,9 +53,11 @@ export const postPostComment = (
   postId: number,
   request: components['schemas']['CreateComment'],
 ) => {
-  return api.post(`${teamId}/posts/${postId}/comments`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/posts/${postId}/comments`, {
+      json: request,
+    })
+    .json();
 };
 
 // 댓글 수정
@@ -60,9 +66,11 @@ export const patchPostComment = (
   commentId: number,
   request: components['schemas']['UpdateComment'],
 ) => {
-  return api.patch(`${teamId}/posts/${postId}/comments/${commentId}`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/posts/${postId}/comments/${commentId}`, {
+      json: request,
+    })
+    .json();
 };
 
 // 댓글 삭제
@@ -72,7 +80,9 @@ export const deletePostComment = (postId: number, commentId: number) => {
 
 // 댓글 좋아요
 export const postPostCommentLike = (postId: number, commentId: number) => {
-  return api.post(`${teamId}/posts/${postId}/comments/${commentId}/like`);
+  return api
+    .post(`${teamId}/posts/${postId}/comments/${commentId}/like`)
+    .json();
 };
 
 // 댓글 좋아요 취소
@@ -82,7 +92,7 @@ export const deletePostCommentLike = (postId: number, commentId: number) => {
 
 // 게시글 좋아요
 export const postPostLike = (postId: number) => {
-  return api.post(`${teamId}/posts/${postId}/like`);
+  return api.post(`${teamId}/posts/${postId}/like`).json();
 };
 
 // 게시글 좋아요 취소

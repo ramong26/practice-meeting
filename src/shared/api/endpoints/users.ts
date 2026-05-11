@@ -12,9 +12,11 @@ export const getMe = () => {
 export const patchMe = (
   request: components['schemas']['UpdateUserRequest'],
 ) => {
-  return api.patch(`${teamId}/users/me`, {
-    json: request,
-  });
+  return api
+    .patch(`${teamId}/users/me`, {
+      json: request,
+    })
+    .json<components['schemas']['User']>();
 };
 
 // 유저 공개 정보 조회

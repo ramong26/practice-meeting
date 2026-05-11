@@ -19,7 +19,7 @@ export const getFavoriteCount = () => {
 
 // 모임 즐겨찾기 추가
 export const postMeetingFavorite = (meetingId: number) => {
-  return api.post(`${teamId}/meetings/${meetingId}/favorites`);
+  return api.post(`${teamId}/meetings/${meetingId}/favorites`).json();
 };
 
 // 모임 즐겨찾기 제거

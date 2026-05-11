@@ -1,6 +1,7 @@
 import ky, { HTTPError } from 'ky';
 
-import { REFRESH_TOKEN_KEY } from '@/shared/constants/token';
+import { teamId } from '@/shared/constants/teamId';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '@/shared/constants/token';
 import type { components } from '@/shared/types/api/api-schemas.types';
 
 export const api = ky.create({
@@ -11,7 +12,7 @@ export const api = ky.create({
   hooks: {
     beforeRequest: [
       async ({ request }) => {
-        const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem(ACCESS_TOKEN_KEY);
         if (token) {
           request.headers.set('Authorization', `Bearer ${token}`);
         }
@@ -25,12 +26,12 @@ export const api = ky.create({
         const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
 
         if (!refreshToken) {
-          localStorage.removeItem('accessToken');
+          localStorage.removeItem(ACCESS_TOKEN_KEY);
           return;
         }
 
         const { accessToken } = await ky
-          .post(`${import.meta.env.VITE_API_BASE}/99-46/auth/refresh-token`, {
+          .post(`${import.meta.env.VITE_API_BASE}/${teamId}/auth/refresh`, {
             json: {
               refreshToken,
             },
@@ -38,7 +39,7 @@ export const api = ky.create({
           })
           .json<components['schemas']['AuthTokens']>();
 
-        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
         request.headers.set('Authorization', `Bearer ${accessToken}`);
       },
     ],
