@@ -4,26 +4,36 @@ import type { components } from '@/shared/types/api/api-schemas.types';
 import { api } from '../client/kyClient';
 
 // 회원가입
-export const postSignup = (request: components['schemas']['SignupRequest']) => {
-  return api.post(`${teamId}/auth/signup`, {
-    json: request,
-  });
+export const postSignup = async (
+  request: components['schemas']['SignupRequest'],
+) => {
+  return await api
+    .post(`${teamId}/auth/signup`, {
+      json: request,
+    })
+    .json<components['schemas']['User']>();
 };
 
 // 이메일 중복 체크
-export const postCheckEmail = (
+export const postCheckEmail = async (
   request: components['schemas']['EmailCheckRequest'],
 ) => {
-  return api.post(`${teamId}/auth/email-check`, {
-    json: request,
-  });
+  return await api
+    .post(`${teamId}/auth/email-check`, {
+      json: request,
+    })
+    .json<components['schemas']['EmailCheckResponse']>();
 };
 
 // 로그인
-export const postLogin = (request: components['schemas']['LoginRequest']) => {
-  return api.post(`${teamId}/auth/login`, {
-    json: request,
-  });
+export const postLogin = async (
+  request: components['schemas']['LoginRequest'],
+) => {
+  return await api
+    .post(`${teamId}/auth/login`, {
+      json: request,
+    })
+    .json<components['schemas']['LoginResponse']>();
 };
 
 // 로그아웃
@@ -35,7 +45,9 @@ export const postLogout = () => {
 export const postRefresh = (
   request: components['schemas']['RefreshRequest'],
 ) => {
-  return api.post(`${teamId}/auth/refresh`, {
-    json: request,
-  });
+  return api
+    .post(`${teamId}/auth/refresh`, {
+      json: request,
+    })
+    .json<components['schemas']['AuthTokens']>();
 };
